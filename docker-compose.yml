@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+        dnsmasq:
+                image: chenxinghua/dnsmasq:latest
+                command: -h -r /run/NetworkManager/resolv.conf --log-facility=-
+                volumes:
+                        - '/run/NetworkManager/:/run/NetworkManager/'
+                ports:
+                        - "53:53/udp"
+                        - "53:53/tcp"
+                networks:
+                        - default
+                restart: always
+                cap_add:
+                        - NET_ADMIN
